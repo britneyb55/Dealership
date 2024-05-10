@@ -28,9 +28,9 @@ public class Logger
         }
     }
 
-    public Dealership loadDealership()
+    public DealershipLot loadDealership()
     {
-       Dealership dealership = null;
+       DealershipLot dealership = null;
 
         File file = new File("files/inventory.csv");
         try(Scanner fileScanner = new Scanner(file)) {
@@ -42,7 +42,7 @@ public class Logger
             String phone = rowOne[2];
 
 
-            dealership = new Dealership(name, address, phone);
+            dealership = new DealershipLot(name, address, phone);
 
             while(fileScanner.hasNext())
             {
@@ -72,7 +72,7 @@ public class Logger
     }
 
 
-    public void logVehicle(int vin, int year, String make, String model, String vehicleType, String color, int odometer, double price)
+    public DealershipLot logVehicle(int vin, int year, String make, String model, String vehicleType, String color, int odometer, double price)
     {
         File logFile = new File(filePath);
 
@@ -81,6 +81,7 @@ public class Logger
         )
         {
             writer.write(String.format("%d|%d|%s|%s|%s|%s|%d|%.2f \n", vin,year,make,model,vehicleType,color,odometer,price ));
+
         }
         catch (IOException ex)
         {

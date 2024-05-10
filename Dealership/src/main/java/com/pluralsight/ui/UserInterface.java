@@ -1,19 +1,19 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.models.Dealership;
+import com.pluralsight.models.DealershipLot;
 import com.pluralsight.models.Vehicle;
 import com.pluralsight.models.Logger;
-
-
 import java.util.Scanner;
-
 
 public class UserInterface
 {
     private static Logger logger = new Logger("inventory");
     private static Scanner userInput = new Scanner(System.in);
+    private
 
-    public static void displayAllVehicles(Dealership dealership)
+
+
+    public static void displayAllVehicles(DealershipLot dealership)
     {
         System.out.println("-".repeat(50));
         System.out.println();
@@ -61,6 +61,14 @@ public class UserInterface
         System.out.println("The vehicle is successfully logged in");
 
         logger.logVehicle(vin, year, make, model, vehicleType, color, odometer, price);
+
+    }
+
+    public static void removeVehicle()
+    {
+        System.out.print("Enter the Vin of the vehicle: ");
+        int vin = Integer.parseInt(userInput.nextLine());
+
 
 
 
