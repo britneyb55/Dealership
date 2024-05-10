@@ -14,15 +14,14 @@ public class Main
 
     public static void main(String[] args)
     {
-        // Create an instance of the logger class
+
         logger inventoryLogger = new logger();
 
-        // Call the readInventory method to read the inventory data from the CSV file
+
         ArrayList<Dealership> dealer = inventoryLogger.readInventoryFirstLine();
         ArrayList<Vehicle> inventory = inventoryLogger.readInventory();
 
-
-        // Display the inventory using the UserInterface class
+        
         UserInterface.displayAllVehicles(inventory,dealer);
 
     }
