@@ -6,12 +6,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class Logger
+
+public class DealershipFileManager
 {
     private final String LOG_DIRECTORY_PATH = "files";
     private String filePath;
 
-    public Logger(String fileName)
+    public DealershipFileManager(String fileName)
     {
         // this makes sure that the logs folder is created
         File directory = new File(LOG_DIRECTORY_PATH);
@@ -21,6 +22,7 @@ public class Logger
         }
 
         // create a variable with the correct file path
+//        this.fileName = fileName;
         this.filePath = LOG_DIRECTORY_PATH + "/" + fileName;
         if(!this.filePath.toLowerCase().endsWith(".csv"))
         {
@@ -28,9 +30,37 @@ public class Logger
         }
     }
 
-    public DealershipLot loadDealership()
+    public void saveDealership(Dealership dealership)
     {
-       DealershipLot dealership = null;
+        File logFile = new File(filePath);
+
+
+
+        try(FileWriter fileWriter = new FileWriter(logFile);
+            PrintWriter writer = new PrintWriter(fileWriter)
+        ) {
+
+                writer.println(String.format("%s|%s|%s", dealership.getName(), dealership.getAddress(), dealership.getPhone()));
+
+
+            for (Vehicle vehicle : dealership.getInventory())
+            {
+
+                    writer.write(String.format("%d|%d|%s|%s|%s|%s|%d|%.2f \n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice()));
+            }
+
+
+        }
+        catch (IOException ex)
+        {
+            System.out.println("Data transaction failed");
+        }
+
+    }
+
+    public Dealership loadDealership()
+    {
+       Dealership dealership = null;
 
         File file = new File("files/inventory.csv");
         try(Scanner fileScanner = new Scanner(file)) {
@@ -42,7 +72,7 @@ public class Logger
             String phone = rowOne[2];
 
 
-            dealership = new DealershipLot(name, address, phone);
+            dealership = new Dealership(name, address, phone);
 
             while(fileScanner.hasNext())
             {
@@ -72,23 +102,7 @@ public class Logger
     }
 
 
-    public DealershipLot logVehicle(int vin, int year, String make, String model, String vehicleType, String color, int odometer, double price)
-    {
-        File logFile = new File(filePath);
 
-        try(FileWriter fileWriter = new FileWriter(logFile, true);
-            PrintWriter writer = new PrintWriter(fileWriter)
-        )
-        {
-            writer.write(String.format("%d|%d|%s|%s|%s|%s|%d|%.2f \n", vin,year,make,model,vehicleType,color,odometer,price ));
-
-        }
-        catch (IOException ex)
-        {
-            System.out.println("Data transaction failed");
-        }
-
-    }
 
 
 
