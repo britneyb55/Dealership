@@ -9,4 +9,14 @@ Although I had the information I needed for each one of my classes, I wanted to 
 ![Home screen](images/diagram.jpeg)
 
 
-##Demo
+##Demo 
+
+![Home screen](images/part1.jpeg)
+
+![Home screen](images/partTwo.jpeg)
+
+![Home screen](images/partThree.jpeg)
+
+![Home screen](images/partfour.jpeg)
+
+![Home screen](images/partfive.jpeg)

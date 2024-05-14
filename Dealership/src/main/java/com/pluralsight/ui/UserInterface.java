@@ -362,6 +362,7 @@ public class UserInterface
             else
             {
               System.out.println("vin does not exist");
+              break;
             }
 
         }
